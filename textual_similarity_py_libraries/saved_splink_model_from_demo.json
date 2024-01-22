@@ -1,0 +1,156 @@
+{
+    "link_type": "dedupe_only",
+    "comparisons": [
+        {
+            "output_column_name": "Facility_Name",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"Facility_Name_l\" IS NULL OR \"Facility_Name_r\" IS NULL",
+                    "label_for_charts": "Null",
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"Facility_Name_l\" = \"Facility_Name_r\"",
+                    "label_for_charts": "Exact match Facility_Name",
+                    "m_probability": 0.7742907509404936,
+                    "u_probability": 0.00010687246010940675
+                },
+                {
+                    "sql_condition": "damerau_levenshtein(\"Facility_Name_l\", \"Facility_Name_r\") <= 1",
+                    "label_for_charts": "Damerau_levenshtein <= 1",
+                    "m_probability": 0.003747415798455994,
+                    "u_probability": 3.1177312599394555e-06
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"Facility_Name_l\", \"Facility_Name_r\") >= 0.9",
+                    "label_for_charts": "Jaro_winkler_similarity >= 0.9",
+                    "m_probability": 0.0455981120703642,
+                    "u_probability": 0.0003695152385897473
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"Facility_Name_l\", \"Facility_Name_r\") >= 0.8",
+                    "label_for_charts": "Jaro_winkler_similarity >= 0.8",
+                    "m_probability": 0.04432573673817234,
+                    "u_probability": 0.005551460809869655
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.13203798445251383,
+                    "u_probability": 0.9939690337601712
+                }
+            ],
+            "comparison_description": "Exact match vs. Facility_Name within levenshtein threshold 1 vs. Facility_Name within damerau-levenshtein threshold 1 vs. Facility_Name within jaro_winkler thresholds 0.9, 0.8 vs. anything else"
+        },
+        {
+            "output_column_name": "State",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"State_l\" IS NULL OR \"State_r\" IS NULL",
+                    "label_for_charts": "Null",
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"State_l\" = \"State_r\"",
+                    "label_for_charts": "Exact match",
+                    "m_probability": 0.9999999907522354,
+                    "u_probability": 0.0318575425167268,
+                    "tf_adjustment_column": "State",
+                    "tf_adjustment_weight": 1.0
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 9.247764490579598e-09,
+                    "u_probability": 0.9681424574832731
+                }
+            ],
+            "comparison_description": "Exact match vs. anything else"
+        },
+        {
+            "output_column_name": "City",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"City_l\" IS NULL OR \"City_r\" IS NULL",
+                    "label_for_charts": "Null",
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"City_l\" = \"City_r\"",
+                    "label_for_charts": "Exact match",
+                    "m_probability": 0.999999994352498,
+                    "u_probability": 0.0008134101066308617,
+                    "tf_adjustment_column": "City",
+                    "tf_adjustment_weight": 1.0
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 5.647502128898944e-09,
+                    "u_probability": 0.9991865898933692
+                }
+            ],
+            "comparison_description": "Exact match vs. anything else"
+        },
+        {
+            "output_column_name": "Address",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"Address_l\" IS NULL OR \"Address_r\" IS NULL",
+                    "label_for_charts": "Null",
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"Address_l\" = \"Address_r\"",
+                    "label_for_charts": "Exact match Address",
+                    "m_probability": 0.9170019513820382,
+                    "u_probability": 8.890883070815025e-05
+                },
+                {
+                    "sql_condition": "damerau_levenshtein(\"Address_l\", \"Address_r\") <= 1",
+                    "label_for_charts": "Damerau_levenshtein <= 1",
+                    "m_probability": 0.005122284683092307,
+                    "u_probability": 3.1276082501660956e-05
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"Address_l\", \"Address_r\") >= 0.9",
+                    "label_for_charts": "Jaro_winkler_similarity >= 0.9",
+                    "m_probability": 0.03766661505027943,
+                    "u_probability": 0.0002878925880825038
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"Address_l\", \"Address_r\") >= 0.8",
+                    "label_for_charts": "Jaro_winkler_similarity >= 0.8",
+                    "m_probability": 0.01067830416758564,
+                    "u_probability": 0.002803722198036797
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.029530844717004467,
+                    "u_probability": 0.996788200300671
+                }
+            ],
+            "comparison_description": "Exact match vs. Address within levenshtein threshold 1 vs. Address within damerau-levenshtein threshold 1 vs. Address within jaro_winkler thresholds 0.9, 0.8 vs. anything else"
+        }
+    ],
+    "blocking_rules_to_generate_predictions": [
+        {
+            "blocking_rule": "(l.\"State\" = r.\"State\") AND (l.\"City\" = r.\"City\")",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "l.\"Address\" = r.\"Address\"",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "l.\"Facility_Name\" = r.\"Facility_Name\"",
+            "sql_dialect": "duckdb"
+        }
+    ],
+    "retain_matching_columns": true,
+    "retain_intermediate_calculation_columns": true,
+    "sql_dialect": "duckdb",
+    "linker_uid": "349ch5he",
+    "probability_two_random_records_match": 0.00011575609995043639
+}
